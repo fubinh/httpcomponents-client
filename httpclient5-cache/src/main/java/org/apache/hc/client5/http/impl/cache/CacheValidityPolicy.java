@@ -43,7 +43,7 @@ import org.apache.hc.core5.util.TimeValue;
 
 class CacheValidityPolicy {
 
-    public static final TimeValue MAX_AGE = TimeValue.ofSeconds(2147483648L);
+    public static final TimeValue MAX_AGE = TimeValue.ofSeconds(Integer.MAX_VALUE + 1L);
 
     CacheValidityPolicy() {
         super();
