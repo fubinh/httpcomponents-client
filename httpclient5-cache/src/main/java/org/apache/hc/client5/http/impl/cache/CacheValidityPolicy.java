@@ -69,7 +69,7 @@ class CacheValidityPolicy {
             return TimeValue.ZERO_MILLISECONDS;
         }
         final long diff = expiry.getTime() - dateValue.getTime();
-        return TimeValue.ofMilliseconds(diff);
+        return TimeValue.ofSeconds(diff / 1000);
     }
 
     public boolean isResponseFresh(final HttpCacheEntry entry, final Date now) {
@@ -105,7 +105,7 @@ class CacheValidityPolicy {
             if (diff < 0) {
                 return TimeValue.ZERO_MILLISECONDS;
             }
-            return TimeValue.ofMilliseconds((long) (coefficient * diff));
+            return TimeValue.ofSeconds((long) (coefficient * diff / 1000));
         }
 
         return defaultLifetime;
@@ -205,7 +205,7 @@ class CacheValidityPolicy {
         if (diff < 0L) {
             return TimeValue.ZERO_MILLISECONDS;
         }
-        return TimeValue.ofMilliseconds(diff);
+        return TimeValue.ofSeconds(diff / 1000);
     }
 
     protected long getAgeValue(final HttpCacheEntry entry) {
@@ -234,16 +234,16 @@ class CacheValidityPolicy {
 
     protected TimeValue getResponseDelay(final HttpCacheEntry entry) {
         final long diff = entry.getResponseDate().getTime() - entry.getRequestDate().getTime();
-        return TimeValue.ofMilliseconds(diff);
+        return TimeValue.ofSeconds(diff / 1000);
     }
 
     protected TimeValue getCorrectedInitialAge(final HttpCacheEntry entry) {
-        return TimeValue.ofMilliseconds(getCorrectedReceivedAge(entry).toMillis() + getResponseDelay(entry).toMillis());
+        return TimeValue.ofSeconds(getCorrectedReceivedAge(entry).toSeconds() + getResponseDelay(entry).toSeconds());
     }
 
     protected TimeValue getResidentTime(final HttpCacheEntry entry, final Date now) {
         final long diff = now.getTime() - entry.getResponseDate().getTime();
-        return TimeValue.ofMilliseconds(diff);
+        return TimeValue.ofSeconds(diff / 1000);
     }
 
     protected long getMaxAge(final HttpCacheEntry entry) {
