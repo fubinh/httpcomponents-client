@@ -180,7 +180,7 @@ public class TestBasicHttpClientConnectionManager {
 
         Mockito.when(conn.isOpen()).thenReturn(Boolean.TRUE, Boolean.FALSE);
 
-        mgr.release(endpoint1, null, TimeValue.NEG_ONE_MILLISECONDS);
+        mgr.release(endpoint1, null, TimeValue.NEG_ONE_MILLISECOND);
 
         Assert.assertEquals(route1, mgr.getRoute());
         Assert.assertEquals(null, mgr.getState());
@@ -229,13 +229,13 @@ public class TestBasicHttpClientConnectionManager {
 
     @Test(expected=IllegalArgumentException.class)
     public void testReleaseInvalidArg() throws Exception {
-        mgr.release(null, null, TimeValue.NEG_ONE_MILLISECONDS);
+        mgr.release(null, null, TimeValue.NEG_ONE_MILLISECOND);
     }
 
     @Test(expected=IllegalStateException.class)
     public void testReleaseAnotherConnection() throws Exception {
         final ConnectionEndpoint wrongCon = Mockito.mock(ConnectionEndpoint.class);
-        mgr.release(wrongCon, null, TimeValue.NEG_ONE_MILLISECONDS);
+        mgr.release(wrongCon, null, TimeValue.NEG_ONE_MILLISECOND);
     }
 
     @Test
@@ -253,7 +253,7 @@ public class TestBasicHttpClientConnectionManager {
 
         Mockito.when(conn.isOpen()).thenReturn(Boolean.TRUE);
 
-        mgr.release(endpoint1, null, TimeValue.NEG_ONE_MILLISECONDS);
+        mgr.release(endpoint1, null, TimeValue.NEG_ONE_MILLISECOND);
 
         mgr.close();
 
@@ -316,7 +316,7 @@ public class TestBasicHttpClientConnectionManager {
 
         Mockito.when(conn.isOpen()).thenReturn(Boolean.TRUE, Boolean.FALSE);
 
-        mgr.release(endpoint1, null, TimeValue.NEG_ONE_MILLISECONDS);
+        mgr.release(endpoint1, null, TimeValue.NEG_ONE_MILLISECOND);
 
         Assert.assertEquals(route, mgr.getRoute());
         Assert.assertEquals(null, mgr.getState());

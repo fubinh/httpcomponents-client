@@ -54,7 +54,7 @@ public class TestDefaultConnKeepAliveStrategy {
         final HttpResponse response = new BasicHttpResponse(HttpStatus.SC_OK);
         final ConnectionKeepAliveStrategy keepAliveStrat = new DefaultConnectionKeepAliveStrategy();
         final TimeValue d = keepAliveStrat.getKeepAliveDuration(response, context);
-        Assert.assertEquals(TimeValue.NEG_ONE_MILLISECONDS, d);
+        Assert.assertEquals(TimeValue.NEG_ONE_MILLISECOND, d);
     }
 
     @Test
@@ -64,7 +64,7 @@ public class TestDefaultConnKeepAliveStrategy {
         response.addHeader("Keep-Alive", "timeout, max=20");
         final ConnectionKeepAliveStrategy keepAliveStrat = new DefaultConnectionKeepAliveStrategy();
         final TimeValue d = keepAliveStrat.getKeepAliveDuration(response, context);
-        Assert.assertEquals(TimeValue.NEG_ONE_MILLISECONDS, d);
+        Assert.assertEquals(TimeValue.NEG_ONE_MILLISECOND, d);
     }
 
     @Test
@@ -74,7 +74,7 @@ public class TestDefaultConnKeepAliveStrategy {
         response.addHeader("Keep-Alive", "timeout=whatever, max=20");
         final ConnectionKeepAliveStrategy keepAliveStrat = new DefaultConnectionKeepAliveStrategy();
         final TimeValue d = keepAliveStrat.getKeepAliveDuration(response, context);
-        Assert.assertEquals(TimeValue.NEG_ONE_MILLISECONDS, d);
+        Assert.assertEquals(TimeValue.NEG_ONE_MILLISECOND, d);
     }
 
     @Test
